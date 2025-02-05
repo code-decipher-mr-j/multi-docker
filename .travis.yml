@@ -13,3 +13,12 @@ after_success:
   - docker build -t jeffreyccd/multi-nginx ./nginx
   - docker build -t jeffreyccd/multi-server ./server
   - docker build -t jeffreyccd/multi-worker ./worker
+
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_LOGIN" --password-stdin
+
+  # Take those images and push them to docker hub
+  - docker push jeffreyccd/multi-client
+  - docker push jeffreyccd/multi-nginx
+  - docker push jeffreyccd/multi-server
+  - docker push jeffreyccd/multi-worker
